@@ -28,6 +28,7 @@
   //var file = fs.readFileSync('public/1x1.png'); 
 
   // Iron Router
+  
   Router.route('i', function() {
     // Return valid image.
     this.response.writeHead(200, {
@@ -41,5 +42,10 @@
       query: this.params.query
     });    
   }, { where: 'server' });
+
+
+//might be useful
+//console.log(WebApp.connectHandlers.listen());
+
 
 
