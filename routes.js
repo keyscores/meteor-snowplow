@@ -1,3 +1,3 @@
-Router.route('/hello', function () {
+Router.route('/', function () {
   this.render('hello');
 });

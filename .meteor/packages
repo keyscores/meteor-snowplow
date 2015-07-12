@@ -9,3 +9,8 @@ autopublish
 insecure
 iron:router
 houston:admin
+meteorhacks:npm
+
+
+npm-container
+cfs:standard-packages

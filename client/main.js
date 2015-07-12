@@ -21,7 +21,8 @@
 
       var ts = new Date().getTime();
       Events.insert({
-        text: 'Event: ' + ts
+        event: 'test',
+        time: ts
       });
       Meteor.call('update', ts, function(error) {
         error && console.log(error);
