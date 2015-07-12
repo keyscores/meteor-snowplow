@@ -30,7 +30,7 @@
   "appName": "snowplow_meteor",
 
   // Location of app (local directory)
-  "app": "~/Desktop/snowplow_meteor/",
+  "app": "~/Desktop/snowplow/",
 
   // Configure environment
   "env": {
