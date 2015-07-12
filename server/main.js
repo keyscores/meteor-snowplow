@@ -30,9 +30,7 @@ Router.route('track/:fileName', {where: 'server'})
     fs.createReadStream(PATH_FOR_YOUR_APP+"/pixel/"+this.params.fileName).pipe(this.response);
     
 //insert query string params
-    Events.insert({
-      query: this.params.query
-    });   
+    Events.insert(this.params.query);   
   })
 
 
