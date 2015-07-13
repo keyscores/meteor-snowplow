@@ -3,4 +3,10 @@
   <button event="test">Test</button>
   <p>Events: {{counter}}</p>
   <p>Last Event: {{last}}</p>
+  
+  {{#if Template.subscriptionsReady}}
+  <div class="chart"></div>
+  {{else}}
+  <p> loading </p>
+  {{/if}}
 </template>
