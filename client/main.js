@@ -8,6 +8,8 @@
   console.log(moment(Number(test[0].dtm)).format('YYYY-MM-DD'));
 
   
+
+
   Template.hello.rendered = function () {
 
 	var chart = c3.generate({
@@ -39,19 +41,21 @@
 		}
 	 
 	});
-  
-    this.autorun(function (tracker) {
-	  chart.load({
-			json: Events.find().fetch(),
-			//json: test,
-			keys: {
-				value: ['cookie'],
-				//xFormat: null,
-				//	x:['dtm']
-			}
+	
+	Tracker.autorun(function (tracker) {
+	  
+	  if(chart){
+		  chart.load({
+				json: Events.find().fetch(),
+				//json: test,
+				keys: {
+					value: ['cookie'],
+					//xFormat: null,
+					//	x:['dtm']
+				}
+		  });
+      }
       });
-
-   });
 
    }
 
