@@ -33,6 +33,23 @@ Router.route('track/:fileName', {where: 'server'})
     Events.insert(this.params.query);   
   })
 
+/* 
+//ALTERNATE IMPLEMENTATION WITH METEORHACKS PICKER ROUTER
+
+Picker.route('/track/i', function(params, req, res, next) {
+  Events.insert(params.query);
+  res.writeHead(200, {
+        'Content-type': 'image/png',
+        'Content-Disposition': "attachment; filename=i" 
+    });
+   //console.log(path.join(__meteor_bootstrap__.serverDir, "../web.browser/app"));
+   //console.log(fs.lstatSync(__meteor_bootstrap__.serverDir, "../web.browser/app/pixel").isDirectory());
+  //TODO make fs return a buffer to res.write
+  res.write(fs.createReadStream(__meteor_bootstrap__.serverDir, "../web.browser/app/pixel/i"));
+  res.end();
+});
+
+*/
 
 /* Lucas' experiment, logging all URLS called on meteor.
 
