@@ -16,3 +16,7 @@ npm-container
 peernohell:c3
 momentjs:moment
 meteorhacks:picker
+materialize:materialize
+alanning:roles
+accounts-password
+accounts-ui
