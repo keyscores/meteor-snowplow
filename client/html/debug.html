@@ -1,0 +1,12 @@
+<template name="debug">
+  <button class="btn" event="reset">Reset</button>
+  <button class="btn" event="test">Test</button>
+  <p>Events: {{counter}}</p>
+  <p>Last Event: {{last}}</p>
+
+  {{#if Template.subscriptionsReady}}
+    {{>eventDonut chartType="donut"}}
+  {{else}}
+  <p> loading </p>
+  {{/if}}
+</template>
