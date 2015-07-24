@@ -3,7 +3,7 @@
 Meteor.methods({
     agg: function() {
       console.log("agg");
-      return Events.aggregate([{
+      Events.aggregate([{
         $group : {
             _id : "$e",
             value: { $sum: "$cookie" },
@@ -11,7 +11,8 @@ Meteor.methods({
         }
       },
       {$out : "agg"}
-       ]);
+      ]);
+
     },
 
     removeAgg: function(ts) {
