@@ -1,15 +1,27 @@
 // Deployed at tracker.keyscores.com with >mup deploy
 
 Meteor.methods({
-    reset: function() {
-      Events.remove({});
+    agg: function() {
+      console.log("agg");
+      return Events.aggregate([{
+        $group : {
+            _id : "$e",
+            value: { $sum: "$cookie" },
+            count: { $sum: 1}
+        }
+      },
+      {$out : "agg"}
+       ]);
     },
 
+    removeAgg: function(ts) {
+      Agg.remove({});
+    },
     update: function(ts) {
       Meteor._debug("TS: " + ts);
     }
 });
-  
+
 
 
 //SERVING FILES IN METEOR AN NEEDS ABSOLUTE PATH
@@ -28,19 +40,19 @@ Router.route('track/:fileName', {where: 'server'})
         'Content-Disposition': "attachment; filename=" + this.params.fileName
     });
     fs.createReadStream(PATH_FOR_YOUR_APP+"/pixel/"+this.params.fileName).pipe(this.response);
-    
+
 //insert query string params
-    Events.insert(this.params.query);   
+    Events.insert(this.params.query);
   })
 
-/* 
+/*
 //ALTERNATE IMPLEMENTATION WITH METEORHACKS PICKER ROUTER
 
 Picker.route('/track/i', function(params, req, res, next) {
   Events.insert(params.query);
   res.writeHead(200, {
         'Content-type': 'image/png',
-        'Content-Disposition': "attachment; filename=i" 
+        'Content-Disposition': "attachment; filename=i"
     });
    //console.log(path.join(__meteor_bootstrap__.serverDir, "../web.browser/app"));
    //console.log(fs.lstatSync(__meteor_bootstrap__.serverDir, "../web.browser/app/pixel").isDirectory());

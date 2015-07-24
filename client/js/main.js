@@ -46,13 +46,16 @@ Template.debug.helpers({
   },
   last: function() {
     return EJSON.stringify(Events.find().fetch().pop(), {indent:true})
+  },
+  agg: function() {
+    return Agg.find().fetch()[0]
   }
 
 });
 
 Template.debug.events({
-  'click button[event=reset]': function() {
-    Meteor.call('reset', function(error) {
+  'click button[event=agg]': function() {
+    Meteor.call('agg', function(error) {
       error && console.log(error);
     });
   }

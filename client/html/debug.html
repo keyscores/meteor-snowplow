@@ -1,8 +1,9 @@
 <template name="debug">
-  <button class="btn" event="reset">Reset</button>
+  <button class="btn" event="agg">Aggregate</button>
   <button class="btn" event="test">Test</button>
   <p>Events: {{counter}}</p>
   <p>Last Event: {{last}}</p>
+  <p>Aggregates: {{agg.count}}</p>
 
   {{#if Template.subscriptionsReady}}
     {{>eventDonut chartType="donut"}}
