@@ -7,6 +7,7 @@ RUN curl https://install.meteor.com/ | sh
 
 WORKDIR /root
 RUN ls
+CMD ["cd .. && ls"]
 RUN meteor build . --directory --architecture os.linux.x86_64
 
 WORKDIR /root/bundle/programs/server
