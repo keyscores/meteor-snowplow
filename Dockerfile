@@ -5,8 +5,8 @@ RUN curl -sL https://deb.nodesource.com/setup | bash -
 RUN apt-get install -y nodejs
 RUN curl https://install.meteor.com/ | sh
 
-WORKDIR /root
-
+#WORKDIR /root
+RUN ls
 RUN meteor build . --directory --architecture os.linux.x86_64
 
 WORKDIR /root/bundle/programs/server
