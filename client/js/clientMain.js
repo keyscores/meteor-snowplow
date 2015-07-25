@@ -53,8 +53,9 @@ Template.debug.helpers({
     return EJSON.stringify(Events.find().fetch().pop(), {indent:true})
   },
   agg: function() {
-    return Agg.find().fetch()[0]
+    return EJSON.stringify(AggCollection.find({id:"se"}).fetch()[0].count, {indent: true});
   }
+
 });
 
 Template.debug.events({

@@ -1,2 +1,2 @@
 Events = new Mongo.Collection("events");
-Agg = new Mongo.Collection("agg");
+AggCollection = new Mongo.Collection("agg");

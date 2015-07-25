@@ -2,17 +2,28 @@
 
 Meteor.methods({
     agg: function() {
-      console.log("agg");
-      Events.aggregate([{
+      console.log("agg Start");
+
+      results = Events.aggregate([{
         $group : {
             _id : "$e",
-            value: { $sum: "$cookie" },
             count: { $sum: 1}
         }
       },
-      {$out : "agg"}
-      ]);
+      //{$out : "agg"}
+      //outputting to collection does not trigger the meteor magic. which woul be ideal. Instead need to loop throught
 
+      ]);
+      console.log("agg end");
+
+      AggCollection.remove({});
+      results.forEach(function(el){
+        AggCollection.insert({
+          id: el._id,
+          count: el.count
+        });
+       }
+     );
     },
 
     removeAgg: function(ts) {
