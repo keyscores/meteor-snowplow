@@ -54,6 +54,9 @@ Router.route('track/:fileName', {where: 'server'})
     fs.createReadStream(PATH_FOR_YOUR_APP+"/pixel/"+this.params.fileName).pipe(this.response);
 
 //insert query string params
+    //params query is logging numbers as strings.
+    //console.log(EJSON.parse(this.params.query.dtm));
+    this.params.query.dtm = EJSON.parse(this.params.query.dtm)
     Events.insert(this.params.query);
   })
 
