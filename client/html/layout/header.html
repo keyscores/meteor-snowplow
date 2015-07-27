@@ -1,0 +1,32 @@
+<template name="header">
+
+  <div class="navbar-fixed"><nav>
+    <div class="nav-wrapper grey lighten-5">
+
+      <div class="col s12">
+
+        <a href="#" data-activates="mobile-demo" class="grey-text text-lighten-1 button-collapse"><i class="mdi-navigation-menu"></i></a>
+
+		<ul>
+        	<li><a href="{{pathFor 'digital'}}" class="orange-text text-lighten-2 " style=" font-size: 1.6rem"> Keyscores</a>
+			</li>
+			<li class="grey-text" style=" font-size: 1.6rem; font-weight:100"> Customer Intelligence </li>
+
+		</ul>
+        <ul class="right hide-on-med-and-down grey-text text-darken-4">
+        	<li><a href="{{pathFor 'digital'}}" class="grey-text text-darken-4" > Digital</a></li>
+			<li><a href="{{pathFor 'pi'}}" class="grey-text text-darken-4" > PI</a></li>
+			<li><a href="{{pathFor 'nextgen'}}" class="grey-text text-darken-4" > NextGen</a></li>
+			<li><a href="{{pathFor 'overview'}}" class="grey-text text-darken-4" > Combined Overview</a></li>
+			<li style="padding-right: 30px"> {{> loginButtons align="right"}} </li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+          <li><a href="{{pathFor 'digital'}}" class="grey-text text-darken-4" > Digital</a></li>
+		  <li><a href="{{pathFor 'pi'}}" class="grey-text text-darken-4" > PI</a></li>
+		  <li><a href="{{pathFor 'nextgen'}}" class="grey-text text-darken-4" > NextGen</a></li>
+		  <li><a href="{{pathFor 'overview'}}" class="grey-text text-darken-4" > Combined Overview</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav></div>
+  </template>
