@@ -5,6 +5,17 @@
 { "_id" : "yJDRvJRvcgaA6iams", "e" : "se", "se_ca" : "test", "se_ac" : "click", "tv" : "js-2.4.2", "tna" : "cf", "aid" : "catlogger.com", "p" : "web", "tz" : "America/New_York", "lang" : "en-US", "cs" : "UTF-8", "f_pdf" : "1", "f_qt" : "0", "f_realp" : "0", "f_wma" : "0", "f_dir" : "0", "f_fla" : "1", "f_java" : "1", "f_gears" : "0", "f_ag" : "0", "res" : "1366x768", "cd" : "24", "cookie" : "1", "eid" : "311478d8-1267-4cff-a449-22e0def94167", "dtm" : 1436744429891, "vp" : "1362x673", "ds" : "1362x673", "vid" : "7", "duid" : "cccf5154fc76440e", "fp" : "724669886", "url" : "http://localhost:3000/test_local.html" }
 ]
 
+Template.dashboard.helpers({
+  eventTableData:function () {
+        return Events.find().fetch();
+  },
+  tableSettings: function () {
+    return {
+      fields: [{ key: 'e', label: 'Event' },{ key: 'hour', label: 'Hour' }]
+    };
+  }
+});
+
 Template.event.rendered = function () {
   //blaze templates passes in a data context, arguement called chartType, which can be = "donut", "bar" or any C3 type this.data.chartType
   var eventData = [{"pageviews":0, "structuredEvents":0}]
@@ -49,11 +60,11 @@ Template.timeseries.rendered = function () {
 		bindto: this.find('.chart'),
 
 		data:{
-      type: "line",
+      type: "bar",
 			json: [{}],
 			keys: {
         value: ["f_fla"],
-        x: "dtm"
+        x: "hour"
 			}
 		},
     axis: {
@@ -67,14 +78,14 @@ Template.timeseries.rendered = function () {
 
 	});
   Tracker.autorun(function () {
-    eventData = Events.find({e:"pv"}).fetch()
-    //console.log(eventData);
+    eventData = AggCollection.find({hour: { $gt: 0}}).fetch()
+    console.log(eventData);
 
     chart.load({
         json: eventData,
         keys: {
-            value: ['f_fla'],
-            x: 'dtm'
+            value: ['count'],
+            x: 'hour'
         }
     });
   });
@@ -107,7 +118,8 @@ Template.debug.helpers({
     return EJSON.stringify(Events.find().fetch().pop(), {indent:true})
   },
   agg: function() {
-    return EJSON.stringify(AggCollection.find({id:"se"}).fetch()[0].count, {indent: true});
+    result = AggCollection.find().fetch()
+    return EJSON.stringify(result, {indent: true});
   }
 
 });

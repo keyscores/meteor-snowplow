@@ -6,4 +6,5 @@ Router.route('/debug', function () {
 });
 Router.route('/dashboard', function () {
   this.render('dashboard');
+  this.layout("layout");
 });

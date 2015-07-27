@@ -7,7 +7,8 @@ Meteor.methods({
       results = Events.aggregate([{
         $group : {
             _id : "$e",
-            count: { $sum: 1}
+            new: { $sum: 1},
+            count: { $sum: "$timestampBucket.hour"}
         }
       },
       //{$out : "agg"}
@@ -16,12 +17,15 @@ Meteor.methods({
       ]);
       console.log("agg end");
 
+      console.log("Persist agg Start");
       AggCollection.remove({});
       results.forEach(function(el){
         AggCollection.insert({
-          id: el._id,
-          count: el.count
+          event: el._id,
+          count: el.count,
+          new: el.new
         });
+        console.log("Persist agg end");
        }
      );
     },
@@ -53,11 +57,40 @@ Router.route('track/:fileName', {where: 'server'})
     });
     fs.createReadStream(PATH_FOR_YOUR_APP+"/pixel/"+this.params.fileName).pipe(this.response);
 
-//insert query string params
+    //insert query string params
+
     //params query is logging numbers as strings.
     //console.log(EJSON.parse(this.params.query.dtm));
     this.params.query.dtm = EJSON.parse(this.params.query.dtm)
+    // add date data from unix epoch
+    console.log(moment(this.params.query.dtm, "x").hour());
+    console.log(moment(this.params.query.dtm, "x").startOf("hour"));
+    console.log(moment(this.params.query.dtm, "x").startOf("hour").unix());
+
+    this.params.query.timestampBucket = {}
+    this.params.query.hour = moment(this.params.query.dtm, "x")
+                                             .startOf("hour")
+                                             .valueOf()
+    this.params.query.timestampBucket.day = moment(this.params.query.dtm, "x")
+                                            .startOf("day")
+                                            .valueOf()
     Events.insert(this.params.query);
+
+    results = Events.aggregate([{
+      $group : {
+          _id : "$hour",
+          count: { $sum: 1}
+      }
+    }]);
+
+    results.forEach(function(el){
+      AggCollection.insert({
+        hour: el._id,
+        count: el.count
+      });
+    });
+
+
   })
 
 /*
