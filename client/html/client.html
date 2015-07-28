@@ -1,0 +1,52 @@
+<template name="client">
+<div class="">
+  <h4> Connected Customers </h4>
+
+    <div class="row">
+      <div class="col s12">
+        <p>
+          Lorem Ipsum
+        </p>
+      </div> <!-- end col-->
+
+      <div class="col s12">
+        {{>reactiveTable collection=eventTableData settings=tableSettings}}
+      </div> <!-- end col-->
+
+    </div> <!-- end Row -->
+
+    <h4> High Score Customers</h4>
+
+      <div class="row">
+        <div class="col s6">
+          <p>
+            Lorem Ipsum
+          </p>
+        </div> <!-- end col-->
+
+        <div class="col s6">
+          {{>timeseries chartType='line'}}
+        </div> <!-- end col-->
+
+      </div> <!-- end Row -->
+
+      <h4>Buying, Watching, Comparing</h4>
+
+        <div class="row">
+          <div class="col s6">
+            <p>
+              Lorem Ipsum
+            </p>
+          </div> <!-- end col-->
+
+          <div class="col s6">
+              {{>reactiveTable collection=eventTableData settings=tableSettings}}
+          </div> <!-- end col-->
+
+        </div> <!-- end Row -->
+
+
+
+
+</div> <!--end container -->
+</template>

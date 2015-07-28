@@ -71,7 +71,7 @@ Template.timeseries.rendered = function () {
           x: {
               type: 'timeseries',
               tick: {
-                      format: '%Y-%m-%d %H:%M:%S'
+                      format: '%d-%m %H:%M'
               }
           }
       },
@@ -166,3 +166,7 @@ Template.login.events({
       });
 		}
 });
+
+Template.action.inheritsHelpersFrom("dashboard");
+
+Template.client.inheritsHelpersFrom("dashboard");
