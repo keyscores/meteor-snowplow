@@ -19,7 +19,7 @@ Template.dashboard.helpers({
 Template.event.rendered = function () {
   //blaze templates passes in a data context, arguement called chartType, which can be = "donut", "bar" or any C3 type this.data.chartType
   var eventData = [{"pageviews":0, "structuredEvents":0}]
-  var eventSeries = ['pageviews', 'structuredEvents']
+  var eventSeries = ['pageviews', 'cart','buy']
 //Need to initialize chart non-reactively. Otherwise re-rendering gets exepensive on every data push. Better to just push
 //new data to an already rendered chart. Use chat.load within autorun
 	var chart = c3.generate({
@@ -31,12 +31,12 @@ Template.event.rendered = function () {
 				value: eventSeries,
 			}
 		}
-
 	});
 
 	Tracker.autorun(function () {
     eventData[0].pageviews = Events.find({e:"pv"}).count()
-    eventData[0].structuredEvents = Events.find({e:"se"}).count()
+    eventData[0].buy = Events.find({se_ca:"button-buy"}).count()
+    eventData[0].cart = Events.find({se_ca:"button-add-to-cart"}).count()
 	  if(chart){
 		  chart.load({
 				json: eventData,
@@ -63,7 +63,7 @@ Template.timeseries.rendered = function () {
       type: "bar",
 			json: [{}],
 			keys: {
-        value: ["f_fla"],
+        value: ["count"],
         x: "hour"
 			}
 		},
@@ -72,7 +72,11 @@ Template.timeseries.rendered = function () {
               type: 'timeseries',
               tick: {
                       format: '%d-%m %H:%M'
-              }
+              },
+              // padding: {
+              //   left: 1,
+              //   right: 1,
+              // }
           }
       },
 
