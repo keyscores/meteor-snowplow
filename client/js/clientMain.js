@@ -4,14 +4,14 @@
 { "_id" : "vX9dz62xEwvmRaQ2f", "e" : "se", "se_ca" : "test", "se_ac" : "click", "tv" : "js-2.4.2", "tna" : "cf", "aid" : "catlogger.com", "p" : "web", "tz" : "America/New_York", "lang" : "en-US", "cs" : "UTF-8", "f_pdf" : "1", "f_qt" : "0", "f_realp" : "0", "f_wma" : "0", "f_dir" : "0", "f_fla" : "1", "f_java" : "1", "f_gears" : "0", "f_ag" : "0", "res" : "1366x768", "cd" : "24", "cookie" : "1", "eid" : "d4ff19ae-854b-4bbf-81e2-ec78685f4c22", "dtm" : 1436744419374, "vp" : "1362x673", "ds" : "1362x673", "vid" : "7", "duid" : "cccf5154fc76440e", "fp" : "724669886", "url" : "http://localhost:3000/test_local.html" },
 { "_id" : "yJDRvJRvcgaA6iams", "e" : "se", "se_ca" : "test", "se_ac" : "click", "tv" : "js-2.4.2", "tna" : "cf", "aid" : "catlogger.com", "p" : "web", "tz" : "America/New_York", "lang" : "en-US", "cs" : "UTF-8", "f_pdf" : "1", "f_qt" : "0", "f_realp" : "0", "f_wma" : "0", "f_dir" : "0", "f_fla" : "1", "f_java" : "1", "f_gears" : "0", "f_ag" : "0", "res" : "1366x768", "cd" : "24", "cookie" : "1", "eid" : "311478d8-1267-4cff-a449-22e0def94167", "dtm" : 1436744429891, "vp" : "1362x673", "ds" : "1362x673", "vid" : "7", "duid" : "cccf5154fc76440e", "fp" : "724669886", "url" : "http://localhost:3000/test_local.html" }
 ]
-
+var now = moment()
 Template.dashboard.helpers({
   eventTableData:function () {
         return Events.find().fetch();
   },
   tableSettings: function () {
     return {
-      fields: [{ key: 'e', label: 'Event' },{ key: 'hour', label: 'Hour' }]
+      fields: [ {key: 'duid', label: 'fingerprint'},{ key: 'url', label: 'URL' },{ key: 'se_ca', label: 'Event',  fn: function (value, object) { if (value){ return value}else{return "Pageview"}}},{ key: 'hour', label: 'Hour', sortOrder: 0, sortDirection: 'descending', fn: function (value, object) { if (value){ return moment(value).format("YYYY-MM-DD HH:mm") }else{return"n/a"}}}]
     };
   }
 });
@@ -24,6 +24,8 @@ Template.event.rendered = function () {
 //new data to an already rendered chart. Use chat.load within autorun
 	var chart = c3.generate({
 		bindto: this.find('.chart'),
+    // color: {pattern: ['#0d47a1', '#1976d2', '#2196f3','#64b5f6']},
+    color: {pattern: ['#1976d2', '#2196f3','#64b5f6']},
 		data:{
       type: this.data.chartType,
 			json: eventData,
@@ -65,13 +67,18 @@ Template.timeseries.rendered = function () {
 			keys: {
         value: ["count"],
         x: "hour"
-			}
+			},
+      names:{
+        count:'Total Events'
+      }
 		},
     axis: {
           x: {
               type: 'timeseries',
+              max: now+10800000,
               tick: {
-                      format: '%d-%m %H:%M'
+                      format: '%d-%m %H:%M',
+                      rotate: 60,
               },
               // padding: {
               //   left: 1,
@@ -79,6 +86,10 @@ Template.timeseries.rendered = function () {
               // }
           }
       },
+      bar: {
+        width: 2,
+        //ratio: .05,
+      }
 
 	});
   Tracker.autorun(function () {

@@ -8,3 +8,20 @@ p {
     font-size: 20px;
     font-weight:100;
 }
+
+.c3 .c3-axis-x path, .c3 .c3-axis-x line {
+    stroke: #9e9e9e;
+}
+
+.c3 .c3-axis-y path, .c3 .c3-axis-y line {
+    stroke: #9e9e9e;
+}
+
+.c3-axis-y .tick,
+.c3-axis-x .tick,
+.c3 .c3-legend-item text {
+  fill:#9e9e9e;
+}
+.reactive-table .sortable {
+color:grey
+}

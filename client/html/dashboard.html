@@ -1,7 +1,11 @@
 <template name="dashboard">
-<div class="">
+<div class="grey-text">
   <h1> Dashboards </h1>
   <h4> Real Time Events </h4>
+  <p>
+    Every user event on a website is updated to the dashboard in real time. Computations continuously update
+    aggregations. All events are stored without preconfiguration.
+  </p>
     <div class="row">
       <div class="col s6">
         {{>event chartType='bar'}}
@@ -18,7 +22,8 @@
     <div class="row">
       <div class="col s6">
         <p>
-          Lorem Ipsum
+          All user events, including pageviews are registered in real-time by the tracker.
+          This chart shows the number of events per hour.
         </p>
       </div> <!-- end col-->
 
@@ -28,12 +33,13 @@
 
     </div> <!-- end Row -->
 
-  <h4> Connected Customers </h4>
+  <h4> Connected Customer Events </h4>
 
     <div class="row">
       <div class="col s12">
         <p>
-          Lorem Ipsum
+          It is also possible to see all connected customers by their unique "fingerprint". These fingerprints are composed
+          of ip address, cookie, and browser version. It is possible to append email and social data to this unique identifier.
         </p>
       </div> <!-- end col-->
 
