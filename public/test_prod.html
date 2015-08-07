@@ -2,42 +2,51 @@
 <head>
 
   <script type="text/javascript">
-  ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
-  p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
-  };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
-  n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","//sp.js","snowplow"));
+  ;(function(k,e,y,s,c,o,r){if(!k[c]){k.GlobalNamespace=k.GlobalNamespace||[];
+  k.GlobalNamespace.push(c);k[c]=function(){(k[c].q=k[c].q||[]).push(arguments)
+  };k[c].q=k[c].q||[];o=e.createElement(y);r=e.getElementsByTagName(y)[0];o.async=1;
+  o.src=s;r.parentNode.insertBefore(o,r)}}(window,document,"script","//tracker.keyscores.com/sp.js","keyscores"));
 
-  window.snowplow('newTracker', 'cf', 'tracker.keyscores.com/track', { // Initialise a tracker change to kstracker.meteor.com
-
+  window.keyscores('newTracker', 'cf', 'tracker.keyscores.com/track', {
       appId: 'catlogger.com'
   });
 
-  window.snowplow('trackPageView');
+  window.keyscores('trackPageView');
+  window.keyscores('enableLinkClickTracking');
 
   </script>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="http://tracker.keyscores.com/jquery.min.js"></script>
   <script type="text/javascript">
     $(document).on('click', '#test', function() {
 
-      window.snowplow('trackStructEvent', 'test', 'click');
+      window.keyscores('trackStructEvent', 'button-add-to-cart', 'click');
     });
 
     $(document).on('click', '#test2', function() {
 
-      window.snowplow('trackStructEvent', 'button-buy', 'click');
+      window.keyscores('trackStructEvent', 'button-buy', 'click');
     });
   </script>
 
-  <!-- https://github.com/snowplow/snowplow-javascript-tracker/blob/master/src/js/tracker.js -->
+  <!-- https://github.com/keyscores/keyscores-javascript-tracker/blob/master/src/js/tracker.js -->
 
   <title>Test Page</title>
 
 </head>
 <body>
-  <h1>You are testing the PRODUCTION tracker: tracker.keyscores.com</h1>
+  <h1>You are Testing the LOCALHOST tracker</h1>
   <p> This is what a third-party website would look like </p>
   <img src="cat.png">
-  <button id="test">Pet the cat</button>
+  <button id="test"> Add to Cart</button>
+  <p> Checkout</p>
+  <button id="test2" class="button"> BUY THE CAT</button>
+
+  <a href="#" id="test-link1">Test link </a>
+
+  <a href="#" id="button in HREF">
+    <button id="testing" class="button"> Button in Href</button>
+  </a>
+
 </body>
 </html>

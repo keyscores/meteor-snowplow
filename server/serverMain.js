@@ -62,20 +62,27 @@ Router.route('track/:fileName', {where: 'server'})
     //params query is logging numbers as strings.
     //console.log(EJSON.parse(this.params.query.dtm));
     this.params.query.dtm = EJSON.parse(this.params.query.dtm)
-    // add date data from unix epoch
-    console.log(moment(this.params.query.dtm, "x").hour());
-    console.log(moment(this.params.query.dtm, "x").startOf("hour"));
-    console.log(moment(this.params.query.dtm, "x").startOf("hour").unix());
+    // add date data from unix epoch, moment() 'x' refers to milliseconds
 
-    this.params.query.timestampBucket = {}
     this.params.query.hour = moment(this.params.query.dtm, "x")
                                              .startOf("hour")
                                              .valueOf()
-    this.params.query.timestampBucket.day = moment(this.params.query.dtm, "x")
-                                            .startOf("day")
-                                            .valueOf()
+
+    if (this.params.query.ue_px){
+      encodedData = this.params.query.ue_px
+      decodedData = new Buffer(encodedData, 'base64');
+      decodedData = decodedData.toString();
+      decodedData = EJSON.parse(decodedData);
+      this.params.query.ue_px_decoded = decodedData.data.data
+      console.log(this.params.query.ue_px_decoded);
+    }
+
+    //Finally insert everyting into the DB
     Events.insert(this.params.query);
 
+
+//DOING AGGREGATIONS ON EACH REQUEST. WOW THIS IS DANGEROUS
+//The idea is moving this to a queue like powerqueue
     results = Events.aggregate([{
       $group : {
           _id : "$hour",
