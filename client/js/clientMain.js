@@ -11,7 +11,7 @@ Template.dashboard.helpers({
   },
   tableSettings: function () {
     return {
-      fields: [ {key: 'duid', label: 'fingerprint'},{ key: 'url', label: 'URL' },{ key: 'se_ca', label: 'Event',  fn: function (value, object) { if (value){ return value}else{return "Pageview"}}},{ key: 'hour', label: 'Hour', sortOrder: 0, sortDirection: 'descending', fn: function (value, object) { if (value){ return moment(value).format("YYYY-MM-DD HH:mm") }else{return"n/a"}}}]
+      fields: [ {key: 'duid', label: 'User Fingerprint'},{ key: 'url', label: 'URL' },{ key: 'se_ca', label: 'Event',  fn: function (value, object) { if (value){ return value}else{return "Pageview"}}},{ key: 'hour', label: 'Hour', sortOrder: 0, sortDirection: 'descending', fn: function (value, object) { if (value){ return moment(value).format("YYYY-MM-DD HH:mm") }else{return"n/a"}}}]
     };
   }
 });
