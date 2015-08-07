@@ -83,6 +83,7 @@ Router.route('track/:fileName', {where: 'server'})
 
 //DOING AGGREGATIONS ON EACH REQUEST. WOW THIS IS DANGEROUS
 //The idea is moving this to a queue like powerqueue
+    AggCollection.remove({});
     results = Events.aggregate([{
       $group : {
           _id : "$hour",
