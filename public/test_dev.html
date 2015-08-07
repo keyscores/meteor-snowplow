@@ -1,0 +1,52 @@
+<html>
+<head>
+
+  <script type="text/javascript">
+  ;(function(k,e,y,s,c,o,r){if(!k[c]){k.GlobalNamespace=k.GlobalNamespace||[];
+  k.GlobalNamespace.push(c);k[c]=function(){(k[c].q=k[c].q||[]).push(arguments)
+  };k[c].q=k[c].q||[];o=e.createElement(y);r=e.getElementsByTagName(y)[0];o.async=1;
+  o.src=s;r.parentNode.insertBefore(o,r)}}(window,document,"script","//localhost:3000/sp.js","keyscores"));
+
+  window.keyscores('newTracker', 'cf', 'localhost:3000/track', {
+      appId: 'catlogger.com'
+  });
+
+  window.keyscores('trackPageView');
+  window.keyscores('enableLinkClickTracking');
+
+  </script>
+
+  <script src="http://localhost:3000/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(document).on('click', '#test', function() {
+
+      window.keyscores('trackStructEvent', 'button-add-to-cart', 'click');
+    });
+
+    $(document).on('click', '#test2', function() {
+
+      window.keyscores('trackStructEvent', 'button-buy', 'click');
+    });
+  </script>
+
+  <!-- https://github.com/keyscores/keyscores-javascript-tracker/blob/master/src/js/tracker.js -->
+
+  <title>Test Page</title>
+
+</head>
+<body>
+  <h1>You are Testing the LOCALHOST tracker</h1>
+  <p> This is what a third-party website would look like </p>
+  <img src="cat.png">
+  <button id="test"> Add to Cart</button>
+  <p> Checkout</p>
+  <button id="test2" class="button"> BUY THE CAT</button>
+
+  <a href="#" id="test-link1">Test link </a>
+
+  <a href="#" id="button in HREF">
+    <button id="testing" class="button"> Button in Href</button>
+  </a>
+
+</body>
+</html>
